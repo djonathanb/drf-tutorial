@@ -22,11 +22,7 @@ class SnippetsTest(TestCase):
 
     def test_create(self):
         response = self.client.post('/snippets/', {
-            'title': '',
             'code': 'print(123)',
-            'linenos': 'false',
-            'language': 'python',
-            'style': 'friendly'
         })
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         # Parse response body and check data.
@@ -51,9 +47,6 @@ class SnippetsTest(TestCase):
         response = self.client.put('/snippets/1/', {
             'title': 'Updated hello world',
             'code': 'print("hello, world")',
-            'linenos': 'false',
-            'language': 'python',
-            'style': 'friendly'
         }, content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Parse response body and check data.
