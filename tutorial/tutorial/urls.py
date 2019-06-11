@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include
 from django.urls import path
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
+
+SCHEMA_VIEW = get_schema_view(title='Pastebin API')
 
 urlpatterns = [
+    path('schema/', SCHEMA_VIEW),
+    path('docs/', include_docs_urls('Snippets API')),
     path('', include('snippets.urls')),
 ]
 

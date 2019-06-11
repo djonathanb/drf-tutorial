@@ -17,6 +17,13 @@ from snippets.serializers import UserSerializer
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides 'list' and 'detail' actions.
+
+    list:
+    Returns a list of all **active** users in the system.
+
+    For more details on how users are activated please [see here][ref].
+
+    [ref]: http://example.com/activating-accounts
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -27,7 +34,28 @@ class SnippetViewSet(viewsets.ModelViewSet):
     This viewset automatically provides 'list' 'create', 'retrieve', 'update'
     and 'destroy' actions.
 
-    Additionally we also provide an extra 'highlight' action.
+    Additionally we also provide an extra 'highlight' action
+
+    list:
+    Return a list of all existing snippets.
+
+    create:
+    Create a new snippet from params.
+
+    read:
+    Return a snippet given its id.
+
+    update:
+    Update a snippet completely.
+
+    partial_update:
+    Update a snippet partialy.
+
+    delete:
+    Delete a snippet given its id.
+
+    highlight:
+    Show highlighted representation of code snippet.
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
@@ -47,4 +75,3 @@ class SnippetViewSet(viewsets.ModelViewSet):
         Create a new snippet setting the owner
         """
         serializer.save(owner=self.request.user)
-
